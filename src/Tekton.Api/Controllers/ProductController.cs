@@ -1,5 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using Tekton.Api.Application.Products.Commands.InsertProduct;
+using Tekton.Api.Application.Products.Queries;
+using Tekton.Api.Infraestructure.Persistences;
 
 namespace Tekton.Api.Controllers;
 
@@ -7,15 +11,40 @@ namespace Tekton.Api.Controllers;
 [Route("[controller]")]
 public class ProductController : Controller
 {
-    [HttpGet("GetById/{productId}")]
-    public async Task<IActionResult> Get(int productId)
+    private readonly IMediator _mediator;
+
+    public ProductController(
+        IMediator mediator)
     {
-        if (productId <= 0)
+        _mediator = mediator;
+    }
+
+    [HttpGet("GetById")]
+    public async Task<IActionResult> Get([FromQuery] GetProductByIdQuery query)
+    {
+        if (query.ProductId <= 0)
         {
             return BadRequest(new { message = "Debe especificar un Id válido"});
         }
 
-        return Ok();
+        var response = await _mediator.Send(query);
+        if (response.Data == null)
+        {
+            return BadRequest(new { message = "Producto no encontrado" });
+        }
+
+        return Ok(response);
+    }
+
+    [HttpPost("InsertAsync")]
+    public async Task<IActionResult> InsertAsync([FromBody] InsertProductCommand command)
+    {
+        var response = await _mediator.Send(command);
+
+        if (response.IsSuccess)
+            return Ok(response);
+
+        return BadRequest(response);
     }
 
     [HttpPut("Update")]

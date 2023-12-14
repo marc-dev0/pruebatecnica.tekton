@@ -1,3 +1,7 @@
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Tekton.Api.Application;
+using Tekton.Api.Infraestructure.Persistences;
 
 namespace Tekton.Api
 {
@@ -13,7 +17,13 @@ namespace Tekton.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<DataContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            builder.Services.AddInjectionApplication(builder.Configuration);
 
+            Log.Logger = new LoggerConfiguration().MinimumLevel.Information()
+                .WriteTo.Console()
+                .WriteTo.File("logs/logs_tekton.log", rollingInterval: RollingInterval.Day).CreateLogger();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
