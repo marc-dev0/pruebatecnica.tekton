@@ -1,9 +1,10 @@
-﻿namespace Tekton.Api.Application.Products.Queries;
+﻿namespace Tekton.Api.Application.Services.Products.Queries;
 
 public class GetProductByIdDto
 {
     public int ProductId { get; set; }
     public string Name { get; set; } = string.Empty;
+    public bool Status { get; set; }
     public string StatusName { get; set; } = string.Empty;
     public int Stock { get; set; }
     public string Description { get; set; } = string.Empty;

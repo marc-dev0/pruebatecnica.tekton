@@ -16,7 +16,7 @@ namespace Tekton.Api.Migrations
                 {
                     ProductId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     StatusName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Stock = table.Column<int>(type: "int", nullable: false),
@@ -29,6 +29,12 @@ namespace Tekton.Api.Migrations
                 {
                     table.PrimaryKey("PK_Products", x => x.ProductId);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_Name",
+                table: "Products",
+                column: "Name",
+                unique: true);
         }
 
         /// <inheritdoc />

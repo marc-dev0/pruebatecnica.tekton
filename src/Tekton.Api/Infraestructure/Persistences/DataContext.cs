@@ -3,16 +3,16 @@ using Tekton.Api.Domain;
 
 namespace Tekton.Api.Infraestructure.Persistences;
 
-public class DataContext : DbContext, IDataContext
+public class DataContext /*: DbContext, IDataContext*/
 {
     public DbSet<Product> Products { get; set; }
-    public DataContext(
+    /*public DataContext(
         DbContextOptions<DataContext> options) : base(options)
     {
 
-    }
+    }*/
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    /*protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Product>()
             .Property(p => p.Price)
@@ -32,4 +32,9 @@ public class DataContext : DbContext, IDataContext
         return result;
     }
 
+    public async Task<int> UpdateProductAsync(Product product)
+    {
+        base.Entry(product).State = EntityState.Modified;
+        return await base.SaveChangesAsync();
+    }*/
 }

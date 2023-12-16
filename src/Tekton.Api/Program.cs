@@ -1,7 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Serilog;
+using System.Reflection;
 using Tekton.Api.Application;
+using Tekton.Api.Infraestructure;
 using Tekton.Api.Infraestructure.Persistences;
+using Tekton.Api.Middleware;
 
 namespace Tekton.Api
 {
@@ -17,10 +21,13 @@ namespace Tekton.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<DataContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             builder.Services.AddInjectionApplication(builder.Configuration);
-
+            builder.Services.AddTransient<ExceptionHandlingMiddleware>();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory,
+                $"{Assembly.GetExecutingAssembly().GetName().Name}.xml"));
+            });
             Log.Logger = new LoggerConfiguration().MinimumLevel.Information()
                 .WriteTo.Console()
                 .WriteTo.File("logs/logs_tekton.log", rollingInterval: RollingInterval.Day).CreateLogger();
@@ -30,16 +37,19 @@ namespace Tekton.Api
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c => {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Mi API V1");
+                });
             }
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.MapControllers();
-
+            
             app.Run();
         }
     }

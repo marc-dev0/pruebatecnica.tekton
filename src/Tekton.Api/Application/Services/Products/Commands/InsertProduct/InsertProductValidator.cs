@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Tekton.Api.Application.Products.Commands.InsertProduct;
+namespace Tekton.Api.Application.Services.Products.Commands.InsertProduct;
 
 public class InsertProductValidator : AbstractValidator<InsertProductCommand>
 {

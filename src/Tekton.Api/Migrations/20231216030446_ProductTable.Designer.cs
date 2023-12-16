@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Tekton.Api.Infraestructure.Persistences;
+using Tekton.Api.Infraestructure;
 
 #nullable disable
 
 namespace Tekton.Api.Migrations
 {
-    [DbContext(typeof(DataContext))]
-    [Migration("20231214054953_ProductTable")]
+    [DbContext(typeof(ApplicationDbContext))]
+    [Migration("20231216030446_ProductTable")]
     partial class ProductTable
     {
         /// <inheritdoc />
@@ -47,7 +47,7 @@ namespace Tekton.Api.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(18, 2)
@@ -63,6 +63,9 @@ namespace Tekton.Api.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ProductId");
+
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Products");
                 });
