@@ -12,7 +12,7 @@ public class ApiDiscountProvider : IDiscountProvider
         this._httpClient = httpClient;
     }
 
-    public async Task<DiscountResponse> GetRandomDiscount(int productId)
+    public async Task<DiscountResponse?> GetRandomDiscount(int productId)
     {
         var request = new HttpRequestMessage(
             HttpMethod.Get,

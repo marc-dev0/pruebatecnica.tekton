@@ -1,0 +1,94 @@
+{
+	"info": {
+		"_postman_id": "1f7e0e3c-b65b-4962-a3d8-6361f53870fb",
+		"name": "TektokPruebaTecnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4666081"
+	},
+	"item": [
+		{
+			"name": "1.- Get product by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7035/Product/GetById?productId=1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7035",
+					"path": [
+						"Product",
+						"GetById"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.- Insert new product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Producto 1\",\r\n    \"status\": true,\r\n    \"stock\": 10,\r\n    \"description\": \"Producto delicioso\",\r\n    \"price\": 15\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7035/Product/InsertAsync",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7035",
+					"path": [
+						"Product",
+						"InsertAsync"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.- Update product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productId\": 7,\r\n    \"name\": \"Actualiacion nombre del producto\",\r\n    \"status\": true,\r\n    \"stock\": 35,\r\n    \"description\": \"Descrpicion actualizada\",\r\n    \"price\": 15.5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7035/Product/UpdateAsync",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7035",
+					"path": [
+						"Product",
+						"UpdateAsync"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

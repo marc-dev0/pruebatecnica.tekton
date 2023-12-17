@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Tekton.Api.Domain;
-using Tekton.Api.Infraestructure.Repositories.Interfaces;
+﻿using Tekton.Api.Infraestructure.Repositories.Interfaces;
 
 namespace Tekton.Api.Infraestructure.Repositories;
 

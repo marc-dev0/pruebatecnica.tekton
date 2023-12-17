@@ -37,9 +37,7 @@ public class InsertProductHandlerTests
         // Assert
         Assert.True(result.IsSuccess);
         Assert.Equal("Registro exitoso", result.Message);
-        // Add more assertions based on your specific response structure
 
-        // Verify that the repository insert and unit of work save changes were called
         productRepositoryMock.Verify(x => x.Insert(It.IsAny<Product>()), Times.Once);
         unitOfWorkMock.Verify(x => x.SaveChangesAsync(default), Times.Once);
     }

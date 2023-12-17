@@ -10,7 +10,6 @@ using Tekton.Api.Application.Services.Products;
 using Tekton.Api.Application.Services.Products.Commands.UpdateProduct;
 using Tekton.Api.Application.Services.Products.Commands.UpdateProduct.PreProcessor;
 using Tekton.Api.Infraestructure;
-using Tekton.Api.Infraestructure.Persistences;
 using Tekton.Api.Infraestructure.Repositories;
 using Tekton.Api.Infraestructure.Repositories.Interfaces;
 
@@ -24,33 +23,24 @@ public static class InjectionExtensions
            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")
                , b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
-        //services.AddDbContext<ApplicationDbContext>();
-        services.AddSingleton<IConfiguration>(configuration);
-
-        // Fluent Validation Configurations
+        services.AddHttpClient();
+        services.AddMemoryCache();
+        services.AddSingleton(configuration);
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
-
-        // DI MediatR
         services.AddMediatR(Assembly.GetExecutingAssembly());
-
-        // Auto Mapper Configurations
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
-
-        //services.AddScoped<IDataContext, DataContext>();
 
         services.AddScoped<IDiscountProvider, ApiDiscountProvider>();
         services.AddScoped<IProductRepository, ProductRepository>();
+        //services.AddScoped<ProductRepository>();
+        services.Decorate<IProductRepository, CachedProductRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped(typeof(IObjectContext<>), typeof(ObjectContext<>));
-        //services.AddSingleton<StatusCacheHelper>();
         services.AddScoped<IStatusCacheHelper, StatusCacheHelper>();
         services.AddScoped<IMemoryCacheWrapper, MemoryCacheWrapper>();
-
-        services.AddHttpClient();
-
         services.AddScoped<DiscountService>();
         services.AddScoped(typeof(ObjectContext<>));
-        services.AddMemoryCache();
+
         services.AddTransient<IRequestPreProcessor<UpdateProductCommand>, _01_UpdateDiscountFinalPricePreProcessor>();
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>));
         

@@ -1,10 +1,8 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Serilog;
 using System.Reflection;
 using Tekton.Api.Application;
-using Tekton.Api.Infraestructure;
-using Tekton.Api.Infraestructure.Persistences;
+using Tekton.Api.Infraestructure.Repositories;
+using Tekton.Api.Infraestructure.Repositories.Interfaces;
 using Tekton.Api.Middleware;
 
 namespace Tekton.Api
@@ -15,10 +13,7 @@ namespace Tekton.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
-
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddInjectionApplication(builder.Configuration);

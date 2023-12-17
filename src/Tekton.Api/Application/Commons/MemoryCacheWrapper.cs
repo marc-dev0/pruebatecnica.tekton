@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using static Tekton.Api.Application.Commons.MemoryCacheWrapper;
 
 namespace Tekton.Api.Application.Commons;
 

@@ -25,11 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Fixtures\" />
-    <Folder Include="Helpers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Tekton.Api\Tekton.Api.csproj" />
   </ItemGroup>
 

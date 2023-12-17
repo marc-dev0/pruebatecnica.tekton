@@ -1,10 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tekton.Api.Application.Services.Products.Queries.PostProcessor;
 using Tekton.Api.Application.Services.Products.Queries;
 using Tekton.Api.Application.Commons;

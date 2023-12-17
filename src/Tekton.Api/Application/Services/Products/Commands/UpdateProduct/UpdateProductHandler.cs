@@ -12,21 +12,18 @@ namespace Tekton.Api.Application.Services.Products.Commands.UpdateProduct;
 
 public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Response<bool>>
 {
-    //private readonly IDataContext _dataContext;
     private readonly IMapper _mapper;
     private readonly IDiscountProvider _discountProvider;
     private readonly IObjectContext<Product> _objectContext;
     private readonly IProductRepository _productRepository;
     private readonly IUnitOfWork _unitOfWork;
     public UpdateProductHandler(
-        //IDataContext dataContext,
         IMapper mapper,
         IDiscountProvider discountProvider,
         IObjectContext<Product> objectContext,
         IProductRepository productRepository,
         IUnitOfWork unitOfWork)
     {
-        //_dataContext = dataContext;
         _mapper = mapper;
         _discountProvider = discountProvider;
         _objectContext = objectContext;
@@ -46,7 +43,6 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Respon
         if (product is null)
             throw new ProductNotFoundException(request.ProductId);
 
-        //int result = await _dataContext.UpdateProductAsync(product);
         _productRepository.Update(product);
         int result = await _unitOfWork.SaveChangesAsync(cancellationToken);
         if (result > 0)

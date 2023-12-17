@@ -10,18 +10,15 @@ namespace Tekton.Api.Application.Services.Products.Commands.InsertProduct;
 
 public class InsertProductHandler : IRequestHandler<InsertProductCommand, Response<bool>>
 {
-    //private readonly IDataContext _dataContext;
     private readonly IMapper _mapper;
     private readonly IProductRepository _productRepository;
     private readonly IUnitOfWork _unitOfWork;
 
     public InsertProductHandler(
-        //IDataContext dataContext,
         IMapper mapper,
         IProductRepository productRepository,
         IUnitOfWork unitOfWork)
     {
-        //_dataContext = dataContext;
         _mapper = mapper;
         _productRepository = productRepository;
         _unitOfWork = unitOfWork;
@@ -35,9 +32,7 @@ public class InsertProductHandler : IRequestHandler<InsertProductCommand, Respon
 
         var requestMap = _mapper.Map<Product>(request);
 
-        _productRepository.Insert(requestMap);
-        /*await _dataContext.Products.AddAsync(requestMap);
-        int result = await _dataContext.SaveChangesAsync(cancellationToken);*/
+        _productRepository.Add(requestMap);
         int result = await _unitOfWork.SaveChangesAsync(cancellationToken);
         if (result > 0)
         {

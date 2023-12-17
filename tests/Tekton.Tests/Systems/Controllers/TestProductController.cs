@@ -30,7 +30,6 @@ public class TestProductController
         // Assert
         var okResult = Assert.IsType<OkObjectResult>(result);
         Assert.NotNull(okResult.Value);
-        // Add more assertions based on your specific response structure
     }
 
     [Fact]

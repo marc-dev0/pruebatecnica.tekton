@@ -22,7 +22,6 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Product>()
             .Property(p => p.Discount)
             .HasPrecision(18, 2);
-
         modelBuilder.Entity<Product>()
                 .HasIndex(p => p.Name)
                 .IsUnique();

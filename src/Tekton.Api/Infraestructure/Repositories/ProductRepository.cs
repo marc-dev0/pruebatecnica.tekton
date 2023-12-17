@@ -10,9 +10,9 @@ public class ProductRepository : IProductRepository
 
     public ProductRepository(ApplicationDbContext dbContext) => _dbContext = dbContext;
 
-    public Task<Product> GetByIdAsync(int productId, CancellationToken cancellationToken = default) =>
-        _dbContext.Products.FirstOrDefaultAsync(product => product.ProductId == productId, cancellationToken);
+    public Task<Product?> GetByIdAsync(int productId, CancellationToken cancellationToken = default) =>
+        _dbContext.Set<Product>().FirstOrDefaultAsync(p => p.ProductId == productId, cancellationToken);
 
-    public void Insert(Product product) => _dbContext.Products.Add(product);
-    public void Update(Product product) => _dbContext.Entry(product).State = EntityState.Modified;
+    public void Add(Product product) => _dbContext.Set<Product>().Add(product);
+    public void Update(Product product) => _dbContext.Set<Product>().Update(product);
 }

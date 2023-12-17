@@ -9,18 +9,15 @@ namespace Tekton.Api.Application.Services.Products.Commands.UpdateProduct.PrePro
 
 public class _01_UpdateDiscountFinalPricePreProcessor : IRequestPreProcessor<UpdateProductCommand>
 {
-    //private readonly IDataContext _dataContext;
     private readonly IDiscountProvider _discountProvider;
     private readonly IObjectContext<Product> _objectContext;
     private readonly IProductRepository _productRepository;
 
     public _01_UpdateDiscountFinalPricePreProcessor(
-        //IDataContext dataContext,
         IDiscountProvider discountProvider,
         IObjectContext<Product> objectContext,
         IProductRepository productRepository)
     {
-        //_dataContext = dataContext;
         _discountProvider = discountProvider;
         _objectContext = objectContext;
         _productRepository = productRepository;
@@ -29,7 +26,6 @@ public class _01_UpdateDiscountFinalPricePreProcessor : IRequestPreProcessor<Upd
     public async Task Process(UpdateProductCommand command, CancellationToken cancellationToken)
     {
         var product = await _productRepository.GetByIdAsync(command.ProductId, cancellationToken);
-        //var product = _dataContext.Products.FirstOrDefault(x => x.ProductId == command.ProductId);
         if (product == null)
         {
             throw new ProductNotFoundException(command.ProductId);

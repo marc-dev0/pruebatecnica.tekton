@@ -36,7 +36,6 @@ public class UpdateProductHandlerTests
         {
             ProductId = 1,
             Name = "Updated Product",
-            // Set other properties
         };
 
         var existingProduct = new Product { ProductId = 1, Name = "Existing Product" };
@@ -55,7 +54,6 @@ public class UpdateProductHandlerTests
         result.IsSuccess.Should().BeTrue();
         result.Message.Should().Be("Actualización exitosa");
 
-        // Additional verifications
         productRepositoryMock.Verify(repo => repo.Update(existingProduct), Times.Once);
         unitOfWorkMock.Verify(unitOfWork => unitOfWork.SaveChangesAsync(default(CancellationToken)), Times.Once);
     }
@@ -82,7 +80,6 @@ public class UpdateProductHandlerTests
         {
             ProductId = 1,
             Name = "Updated Product",
-            // Set other properties
         };
 
         objectContextMock.Setup(context => context.GetModifiedObject(nameof(Product)))
