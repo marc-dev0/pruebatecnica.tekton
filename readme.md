@@ -22,4 +22,4 @@ dotnet ef migrations add ProductTable
 dotnet ef database update
 
 ## Consideraciones
-1.- En el repositorio raiz del git se encuentra la colección json (Tekton.postman_collection) para cargar los endpoints y testear
+1.- En el repositorio raiz del git se encuentra la colección json (Tekton.postman_collection) para cargar y testear los endpoints 
