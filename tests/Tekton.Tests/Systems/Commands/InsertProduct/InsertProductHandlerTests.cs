@@ -28,7 +28,7 @@ public class InsertProductHandlerTests
         };
 
         mapperMock.Setup(x => x.Map<Product>(It.IsAny<InsertProductCommand>())).Returns(new Product());
-        productRepositoryMock.Setup(x => x.Insert(It.IsAny<Product>()));
+        productRepositoryMock.Setup(x => x.Add(It.IsAny<Product>()));
         unitOfWorkMock.Setup(x => x.SaveChangesAsync(default)).ReturnsAsync(1);
 
         // Act
@@ -38,7 +38,7 @@ public class InsertProductHandlerTests
         Assert.True(result.IsSuccess);
         Assert.Equal("Registro exitoso", result.Message);
 
-        productRepositoryMock.Verify(x => x.Insert(It.IsAny<Product>()), Times.Once);
+        productRepositoryMock.Verify(x => x.Add(It.IsAny<Product>()), Times.Once);
         unitOfWorkMock.Verify(x => x.SaveChangesAsync(default), Times.Once);
     }
 
@@ -57,7 +57,7 @@ public class InsertProductHandlerTests
         };
 
         mapperMock.Setup(x => x.Map<Product>(It.IsAny<InsertProductCommand>())).Returns(new Product());
-        productRepositoryMock.Setup(x => x.Insert(It.IsAny<Product>()));
+        productRepositoryMock.Setup(x => x.Add(It.IsAny<Product>()));
         unitOfWorkMock.Setup(x => x.SaveChangesAsync(default)).ReturnsAsync(0);
 
         // Act
@@ -67,7 +67,7 @@ public class InsertProductHandlerTests
         Assert.False(result.IsSuccess);
         Assert.Equal(null, result.Message);
 
-        productRepositoryMock.Verify(x => x.Insert(It.IsAny<Product>()), Times.Once);
+        productRepositoryMock.Verify(x => x.Add(It.IsAny<Product>()), Times.Once);
         unitOfWorkMock.Verify(x => x.SaveChangesAsync(default), Times.Once);
     }
 
