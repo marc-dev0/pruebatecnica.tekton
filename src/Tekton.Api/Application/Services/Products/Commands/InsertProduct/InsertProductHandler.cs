@@ -29,17 +29,10 @@ public class InsertProductHandler : IRequestHandler<InsertProductCommand, Respon
         Log.Information("Adding new product to database : {productId}", JsonConvert.SerializeObject(request, Formatting.Indented));
 
         var response = new Response<bool>();
-
         var requestMap = _mapper.Map<Product>(request);
 
         _productRepository.Add(requestMap);
-        int result = await _unitOfWork.SaveChangesAsync(cancellationToken);
-        if (result > 0)
-        {
-            response.IsSuccess = true;
-            response.Message = "Registro exitoso";
-            Log.Information("Product added successfully");
-        }
+        response.Data = await _unitOfWork.SaveChangesAsync(cancellationToken) > 0;
 
         return response;
     }

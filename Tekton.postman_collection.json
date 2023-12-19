@@ -33,13 +33,33 @@
 			"response": []
 		},
 		{
-			"name": "2.- Insert new product",
+			"name": "2.- Get all products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5062/Product/GetByAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5062",
+					"path": [
+						"Product",
+						"GetByAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.- Insert new product",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Producto 1\",\r\n    \"status\": true,\r\n    \"stock\": 10,\r\n    \"description\": \"Producto delicioso\",\r\n    \"price\": 15\r\n}",
+					"raw": "{\r\n    \"name\": \"Producto 3\",\r\n    \"status\": true,\r\n    \"stock\": 10,\r\n    \"description\": \"Producto delicioso\",\r\n    \"price\": 15\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,7 +88,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"productId\": 7,\r\n    \"name\": \"Actualiacion nombre del producto\",\r\n    \"status\": true,\r\n    \"stock\": 35,\r\n    \"description\": \"Descrpicion actualizada\",\r\n    \"price\": 15.5\r\n}",
+					"raw": "{\r\n    \"productId\": 1,\r\n    \"name\": \"Actualiacion nombre del productoxx\",\r\n    \"status\": false,\r\n    \"stock\": 35,\r\n    \"description\": \"Descrpicion actualizada\",\r\n    \"price\": 15.5\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"

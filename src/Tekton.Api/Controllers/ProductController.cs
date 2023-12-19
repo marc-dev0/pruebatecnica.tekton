@@ -1,9 +1,10 @@
-﻿using Azure;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Tekton.Api.Application.Services.Products.Commands.InsertProduct;
 using Tekton.Api.Application.Services.Products.Commands.UpdateProduct;
-using Tekton.Api.Application.Services.Products.Queries;
+using Tekton.Api.Application.Services.Products.Queries.GetProductById;
+using Tekton.Api.Application.Services.Products.Queries.GetProductByAll;
+using Tekton.Api.Application.Commons;
 
 namespace Tekton.Api.Controllers;
 
@@ -35,6 +36,21 @@ public class ProductController : Controller
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [HttpGet("GetById")]
     public async Task<IActionResult> Get([FromQuery] GetProductByIdQuery query)
+    {
+        var response = await _mediator.Send(query);
+
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Obtiene todos los productos
+    /// </summary>
+    /// <param name="query"></param>    
+    /// <returns>Todos los productos existentes en la bd</returns>
+    [ProducesResponseType(typeof(Response<GetProductByIdDto>), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [HttpGet("GetByAll")]
+    public async Task<IActionResult> Get([FromQuery] GetProductByAllQuery query)
     {
         var response = await _mediator.Send(query);
 

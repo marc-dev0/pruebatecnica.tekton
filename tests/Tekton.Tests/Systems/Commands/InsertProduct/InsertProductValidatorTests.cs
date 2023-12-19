@@ -15,7 +15,6 @@ public class InsertProductValidatorTests
             Status = true,
             Description = "Product Description",
             Price = 10.50M
-            // Set other valid properties
         };
 
         // Act

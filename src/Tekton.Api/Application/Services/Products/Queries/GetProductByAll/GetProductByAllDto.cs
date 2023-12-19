@@ -1,6 +1,6 @@
-﻿namespace Tekton.Api.Application.Services.Products.Queries;
+﻿namespace Tekton.Api.Application.Services.Products.Queries.GetProductByAll;
 
-public class GetProductByIdDto
+public class GetProductByAllDto
 {
     public int ProductId { get; set; }
     public string Name { get; set; } = string.Empty;

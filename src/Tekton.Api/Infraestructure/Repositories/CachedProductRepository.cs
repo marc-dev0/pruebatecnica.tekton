@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Caching.Memory;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Tekton.Api.Domain;
 using Tekton.Api.Infraestructure.Repositories.Interfaces;
 
@@ -32,4 +33,12 @@ public class CachedProductRepository : IProductRepository
     public void Add(Product product) => _decorated.Add(product);
 
     public void Update(Product product) => _decorated.Update(product);
+
+    public Task<List<Product>> GetAllAsync(CancellationToken cancellationToken = default) =>
+        _decorated.GetAllAsync(cancellationToken);
+
+    public Task Delete(int productId, CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -44,13 +44,8 @@ public class UpdateProductHandler : IRequestHandler<UpdateProductCommand, Respon
             throw new ProductNotFoundException(request.ProductId);
 
         _productRepository.Update(product);
-        int result = await _unitOfWork.SaveChangesAsync(cancellationToken);
-        if (result > 0)
-        {
-            response.IsSuccess = true;
-            response.Message = "Actualización exitosa";
-            Log.Information("Product updated successfully");
-        }
+        response.Data = await _unitOfWork.SaveChangesAsync(cancellationToken) > 0;
+        
         return response;
     }
 

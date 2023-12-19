@@ -5,7 +5,7 @@ using Moq;
 using Tekton.Api.Application.Commons;
 using Tekton.Api.Application.Services.Products.Commands.InsertProduct;
 using Tekton.Api.Application.Services.Products.Commands.UpdateProduct;
-using Tekton.Api.Application.Services.Products.Queries;
+using Tekton.Api.Application.Services.Products.Queries.GetProductById;
 using Tekton.Api.Controllers;
 
 namespace Tekton.Tests.Systems.Controllers;
@@ -20,7 +20,6 @@ public class TestProductController
         var controller = new ProductController(mediatorMock.Object);
         var query = new GetProductByIdQuery { ProductId = 1 };
 
-        // Set up the expected response from the mediator
         mediatorMock.Setup(x => x.Send(It.IsAny<GetProductByIdQuery>(), CancellationToken.None))
             .ReturnsAsync(new Response<GetProductByIdDto> { Data = new GetProductByIdDto() });
 
