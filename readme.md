@@ -15,10 +15,10 @@ dotnet restore
 5.- Entrar a la carpeta del proyecto WebApi\
 cd src\Tekton.Api
 
-6.- Ejecutar la bd local EF
+6.- Ejecutar la bd local EF\
 dotnet ef migrations add ProductTable
 
-7.- Actualizar bd local EF
+7.- Actualizar bd local EF\
 dotnet ef database update
 
 ## Consideraciones
